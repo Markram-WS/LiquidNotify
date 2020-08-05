@@ -68,32 +68,33 @@ def main():
     ProuductID = getID(symbol)
     time.sleep(1)
     #--------------------------------------------
-    while(True):
-        try:
-          data = getProdutByID(ProuductID)
-          pair = data['currency_pair_code']
-          bid = np.round(data['market_ask'], 3)
-          ask = np.round(data['market_bid'], 3)
-          ts = data['timestamp']
-          msg =pair +'  '+str(bid)+' | '+str(ask)
-          conditionPrice = (np.round(ask,2)*10) % 5
-          tm= datetime.fromtimestamp(int(ts.split('.')[0])) 
-          print("%s BID:%0.3f ASK:%0.3f" %(tm,bid,ask),end="\r")
-          #print("%s BID:%0.3f ASK:%0.3f" %(tm,bid,ask))
-          if(prePrice == 0):
-              lineSendMas('notification start')
-              prePrice=np.round(ask,1)
+    
+    try:
+      data = getProdutByID(ProuductID)
+      pair = data['currency_pair_code']
+      bid = np.round(data['market_ask'], 3)
+      ask = np.round(data['market_bid'], 3)
+      ts = data['timestamp']
+      msg =pair +'  '+str(bid)+' | '+str(ask)
+      conditionPrice = (np.round(ask,2)*10) % 5
+      tm= datetime.fromtimestamp(int(ts.split('.')[0])) 
+      print("BID:%0.3f ASK:%0.3f %s" %(bid,ask,tm),end="\r")
+      #print("%s BID:%0.3f ASK:%0.3f" %(tm,bid,ask))
+      if(prePrice == 0):
+          lineSendMas('notification start')
+          prePrice=np.round(ask,1)
 
-          if(np.round(ask,1) != prePrice and conditionPrice == 0):
-              lineSendMas(msg)
-              prePrice=np.round(ask,1)
-        except:
-          print('bad request',end="\r")
-          time.sleep(300)
+      if(np.round(ask,1) != prePrice and conditionPrice == 0):
+          lineSendMas(msg)
+          prePrice=np.round(ask,1)
+    except:
+      print('bad request',end="\r")
+      time.sleep(300)
         
-        time.sleep(5)
+        
 
-if __name__ == '__main__':
-  
+
+while(True):
   main()
+  time.sleep(5)
 
