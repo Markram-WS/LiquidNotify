@@ -10,7 +10,7 @@ import time
 #Msg Line
 def lineSendMas(msg_line):
     url_line = 'https://notify-api.line.me/api/notify'
-    token_line = 'zh2i6So8Twmt5Ea6zkLyHvS3fi6kMkibsOKC8UNwH8q'
+    token_line = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     headers_line = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token_line}
     reg_line = requests.post(url_line, headers=headers_line , data = {'message':msg_line})
     #print(reg_line.text)
@@ -18,7 +18,7 @@ def lineSendMas(msg_line):
 # API Liquid info
 host = 'https://api.liquid.com'
 tokenId = '1448568'
-tokenSecret = b'k9Pb8No3o/XD6UL5VgBmP+gwd3jfgC6w9TKXLJnfD0LWihgS/R5sHyjY2eQ4ZxRawGrirS6rYNcDA6DhW08Ang=='
+tokenSecret = b'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 header = {
     'Accept': 'application/json',
